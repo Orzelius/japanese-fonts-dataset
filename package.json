@@ -1,0 +1,26 @@
+{
+  "name": "DB",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r esm makePics.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "canvas": "^2.6.1",
+    "cheerio": "^1.0.0-rc.3",
+    "color": "^3.1.2",
+    "esm": "^3.2.25",
+    "fontforge": "0.0.4",
+    "fontkit": "^1.8.1",
+    "fontname": "^1.0.0",
+    "text-to-image": "^2.3.0",
+    "text2png": "^2.3.0",
+    "wanakana": "^4.0.2"
+  }
+}
