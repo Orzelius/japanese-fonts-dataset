@@ -9,31 +9,9 @@ const ctx = canvas.getContext('2d')
 const FontName = require('fontname');
 var fontkit = require('fontkit');
 // import { getName } from './fontforge';
-import * as wanakana from 'wanakana';
+// import * as wanakana from 'wanakana';
+const {PROPS} = require('./const')
 
-
-const vowels = ['a', 'i', 'u', 'e', 'o']
-const consonants = ['k', 'g', 's', 'z', 't', 'd', 'n', 'h', 'p', 'b', 'm', 'y', 'r', 'w']
-
-const basicKana = {
-  latin: '',
-  katakana: '',
-  hiragana: '',
-  daku: false,
-}
-const kana = [];
-vowels.forEach(vowel => {
-  consonants.forEach(cons => {
-    let newKana = { ...basicKana, latin: (cons + vowel) };
-    newKana.katakana = wanakana.toKatakana(newKana.latin);
-    newKana.hiragana = wanakana.toHiragana(newKana.latin);
-    if(cons === 'g' || cons === 'z' || cons === 'd' || cons === 'p' || cons === 'b'){
-      newKana.daku = true;
-    }
-    if(newKana.latin != 'wi' && newKana.latin != 'we' && newKana.latin != 'ye' && newKana.latin != 'we')
-    kana.push(newKana);
-  })
-});
 const sortFonts = () => {
   const fontsPath = __dirname + '/fonts/valid';
   (async () => {
@@ -44,7 +22,8 @@ const sortFonts = () => {
         count++;
         if (file) {
           // console.log('\n', count, file);
-          kana.forEach(kanaEl => {
+          console.log(PROPS)
+          PROPS.classes.forEach(kanaEl => {
             console.log(count, kanaEl);
             const fromPath = path.join(fontsPath, file);
             registerFont(fromPath, { family: "aaasd" });
@@ -55,9 +34,9 @@ const sortFonts = () => {
             // console.log(font.familyName + '  ');
             ctx.font = '80px "' + font.familyName + '"'
             ctx.fillStyle = '#fff'
-            ctx.fillText(kanaEl.hiragana, 10, 80, 100)
-            canvas.createJPEGStream()
-              .pipe(fs.createWriteStream(path.join(__dirname, '/images/hiragana/' + `${kanaEl.latin}_${font.familyName}_daku${kanaEl.daku}`+ '.jpeg')));
+            ctx.fillText(kanaEl.kat, 10, 80, 100)
+            canvas.createPNGStream()
+              .pipe(fs.createWriteStream(path.join(__dirname, '/images/katakana/' + `${kanaEl.kat}_${count}.png`)));
           });
         }
       }
